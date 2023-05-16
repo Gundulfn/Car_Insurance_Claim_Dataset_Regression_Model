@@ -52,10 +52,10 @@ if add_radio == "Data Preview":
     st.write('drop some columns because of High Cardinality ("INCOME", "HOME_VAL") and Imbalance ("KIDSDRIV") and High Cardinality and Imbalance ("OLDCLAIM") and Unnecessary Column ("ID") and Overfitting ("CLM_AMT","CLAIM_FLAG") after severity and frequency calculation')
     
     st.write("#### Feature Importance Graphic for Frequency Model")
-    image = Image.open(r"C:\Users\Asus\Desktop\kodluyoruz\hafta_4\feature_importance_frq.png")
+    image = Image.open(r"feature_importance_frq.png")
     st.image(image ,width=800)
     st.write("#### Feature Importance Graphic for Severity Model")
-    image = Image.open(r"C:\Users\Asus\Desktop\kodluyoruz\hafta_4\feature_importance_sev.png")
+    image = Image.open(r"feature_importance_sev.png")
     st.image(image ,width=800)
     
 if add_radio == "Base Insurance Premium Calculation":
