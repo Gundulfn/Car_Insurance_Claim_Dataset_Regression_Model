@@ -178,12 +178,12 @@ if add_radio == "Base Insurance Premium Calculation":
     ypred = ypred_sev * ypred_frq
     
     st.write("### Severity Result:")
-    st.title(str(np.round(ypred_sev[0]/10,3))+" $")
+    st.title(str(np.round(ypred_sev[0]/10,2))+" $")
     st.write("### Frequency Result:")
-    st.title(str(np.round(ypred_frq[0]/1000,3)))
+    st.title(str(np.round(ypred_frq[0]/1000,2)))
     
     st.write("### Base Insurance Premium Calculation Result:")
-    st.title(str(np.round(ypred[0]/10000,3))+" $")
+    st.title(str(np.round(ypred[0]/10000,2))+" $")
 
     image = Image.open(r"car_insurance_image.jpg")
     st.image(image ,width=800)
