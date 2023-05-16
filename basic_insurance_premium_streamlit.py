@@ -9,7 +9,7 @@ import pickle
 st.set_page_config(page_title="Base Insurance Premium Calculation Model")
 
 st.write("## Car Insurance Claim Data - Regression Analysis")
-df = pd.read_csv(r"C:\Users\Asus\Desktop\kodluyoruz\hafta_4\autodata.csv")
+df = pd.read_csv(r"autodata.csv")
 
 for i in df.columns:
     if df[i].dtypes == "object":
@@ -136,24 +136,12 @@ if add_radio == "Base Insurance Premium Calculation":
     # High Cardinality and Imbalance
     df2.drop(labels=["OLDCLAIM"],axis=1,inplace=True)     
 
-#     df3 = df2.groupby("ID").agg({"CLAIM_FLAG":"sum",
-#                                  "CLM_AMT" : "sum"}).reset_index()
-#     df3["SEVERITY"] = df3.CLM_AMT / df3.CLAIM_FLAG
-#     df3 = df3[["ID","SEVERITY"]].sort_values(by= "SEVERITY",ascending=False)
-#     df4 = df2.merge(df3,how="left",on="ID")
-
-#     df6 = df2.groupby("ID").agg({"CLAIM_FLAG":"sum",
-#                            "BLUEBOOK":"count"}).reset_index()
-#     df6["FRQ"] = df6.CLAIM_FLAG / df6.BLUEBOOK
-#     df6 = df6[["ID","FRQ"]].sort_values(by= "FRQ",ascending=False)
-#     df4 = df4.merge(df6,how="left",on="ID")
-#     df5 = df4.drop(["ID","CLM_AMT","CLAIM_FLAG"],axis=1)
     df2.drop(["ID","CLM_AMT","CLAIM_FLAG"],axis=1,inplace=True)
 
     df_sev = df2.copy()
     df_frq = df2.copy()
     
-    target_sev = open(r"C:\Users\Asus\Desktop\kodluyoruz\hafta_4\Target_Encoder_sev.sav", 'rb')
+    target_sev = open(r"Target_Encoder_sev.sav", 'rb')
     target_encoder_sev = pd.read_pickle(target_sev)
     #target_encoder = pickle.load(open(r"Target_Encoder.sav", 'rb'))
     
@@ -164,7 +152,7 @@ if add_radio == "Base Insurance Premium Calculation":
 
     # Load already trained model (XGBoost)
     
-    model_sev = open(r"C:\Users\Asus\Desktop\kodluyoruz\hafta_4\SEV_Model.sav", 'rb')
+    model_sev = open(r"SEV_Model.sav", 'rb')
     lr_sev = pd.read_pickle(model_sev)
     #lr = pickle.load(open(r"regression_model.sav", 'rb'))
     
@@ -172,7 +160,7 @@ if add_radio == "Base Insurance Premium Calculation":
     
     # ----------------------------------------------------------------------------------------------------------
     
-    target_frq = open(r"C:\Users\Asus\Desktop\kodluyoruz\hafta_4\Target_Encoder_frq.sav", 'rb')
+    target_frq = open(r"Target_Encoder_frq.sav", 'rb')
     target_encoder_frq = pd.read_pickle(target_frq)
     
     df3_frq = pd.DataFrame(target_encoder_frq.transform(df_frq),index = df_frq.index,columns = df_frq.columns)
@@ -182,7 +170,7 @@ if add_radio == "Base Insurance Premium Calculation":
 
     # Load already trained model (XGBoost)
     
-    model_frq = open(r"C:\Users\Asus\Desktop\kodluyoruz\hafta_4\FRQ_Model.sav", 'rb')
+    model_frq = open(r"FRQ_Model.sav", 'rb')
     lr_frq = pd.read_pickle(model_frq)
     
     ypred_frq = lr_sev.predict(newdata_frq)
@@ -197,21 +185,21 @@ if add_radio == "Base Insurance Premium Calculation":
     st.write("### Base Insurance Premium Calculation Result:")
     st.title(str(np.round(ypred[0]/10000,3))+" $")
 
-    image = Image.open(r"C:\Users\Asus\Desktop\kodluyoruz\hafta_4\car_insurance_image.jpg")
+    image = Image.open(r"car_insurance_image.jpg")
     st.image(image ,width=800)
     
     st.write("### The Results of XGBRegressor Model")
     
     st.write('#### Frequency Model Result')
-    image = Image.open(r"C:\Users\Asus\Desktop\kodluyoruz\hafta_4\frq_model_result.png")
+    image = Image.open(r"frq_model_result.png")
     st.image(image ,width=800)
     
     st.write('#### Severity Model Result')
-    image = Image.open(r"C:\Users\Asus\Desktop\kodluyoruz\hafta_4\sev_model_result.png")
+    image = Image.open(r"sev_model_result.png")
     st.image(image ,width=800)
     
     st.write('#### Base Insurance Premium Calculation Results')
-    image = Image.open(r"C:\Users\Asus\Desktop\kodluyoruz\hafta_4\base_premium_model_result.png")
+    image = Image.open(r"base_premium_model_result.png")
     st.image(image ,width=800)
-    image = Image.open(r"C:\Users\Asus\Desktop\kodluyoruz\hafta_4\base_premium_model_result2.png")
+    image = Image.open(r"base_premium_model_result2.png")
     st.image(image ,width=800)
