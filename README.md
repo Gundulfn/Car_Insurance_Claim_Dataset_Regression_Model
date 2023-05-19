@@ -21,5 +21,7 @@ The model results were presented using Streamlit at the link below
 
 ## Prepared By
 [Serdar Ekiz](https://github.com/serdarekiz)
+
 [Olkan Berke Gölbaşı](https://github.com/OlkanBerke)
+
 [Burak Can Çiftçi](https://github.com/Gundulfn)
